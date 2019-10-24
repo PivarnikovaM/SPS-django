@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        
+        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        
+        <h1>{{ post.title }}</h1>
+        
+        <p>{{ post.text|linebreaksbr }}</p>
+        <br>
+        <p> {{post.like_set.count}}</p>
+        
+      
+        
+        <form action="{% url 'post_like' pk=post.pk %}" method="post">{% csrf_token %}<button type="submit">Like</button></form>
+        
+    
+
+    </div>
+{% endblock %}
